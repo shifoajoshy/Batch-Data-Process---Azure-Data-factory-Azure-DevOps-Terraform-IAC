@@ -16,6 +16,7 @@ Design and implement a data pipeline capable of extracting large volumes of data
 - **Azure DevOps**: Facilitates version control, CI/CD pipeline setup, and collaboration.
 - **Azure Data Lake**: Provides secure and scalable storage for intermediate and raw datasets.
 - **Azure PostgreSQL**: Serves as the target database for structured and processed data storage.
+![logical flow](https://github.com/user-attachments/assets/024e5c4d-ac39-4c1c-bcd3-ebf65832adf0)
 
 ---
 
@@ -30,13 +31,6 @@ Design and implement a data pipeline capable of extracting large volumes of data
 - Securely transfer data to Azure Blob Storage.
 - Perform intermediate transformations to ensure data quality before final storage in Azure PostgreSQL.
 - Implement robust authentication, data integrity checks, and monitoring systems.
-
----
-
-## Conceptual Overview
-- **Data Format Conversion**: Convert JSON data from OpenWeather APIs to CSV format.
-- **Parquet File Transformation**: Transform CSV files to Parquet format for efficient ingestion into PostgreSQL.
-- **Storage Optimization**: Delete intermediate CSV files post-transformation to save storage space.
 
 ---
 
@@ -55,25 +49,37 @@ Design and implement a data pipeline capable of extracting large volumes of data
 - Scheduled to run daily on business days.
 
 ### Stages of Azure Data Factory Pipelines:
+
+#### Conceptual Overview
+- **Data Format Conversion**: Convert JSON data from OpenWeather APIs to CSV format.
+- **Parquet File Transformation**: Transform CSV files to Parquet format for efficient ingestion into PostgreSQL.
+- **Storage Optimization**: Delete intermediate CSV files post-transformation to save storage space.
+####Main pipeline
+![Main pipeline](https://github.com/user-attachments/assets/ddcdbc03-7299-4fd4-8bec-44ce4e2f77e4)
+
 #### Stage 1: Lookup and Dynamic API Calls
 - Retrieve relative URLs from configuration files in Blob Storage.
 - Use ForEach Activity to trigger Copy Activity for data ingestion.
+  ![foreach](https://github.com/user-attachments/assets/bebb5a71-14f2-447d-a570-579a6aee17f2)
 
 #### Stage 2: Data Storage in Azure Data Lake
 - Transfer API data to Blob Storage in JSON format.
 - Convert JSON to CSV, then to Parquet for optimized storage.
 - Separate pipelines for different regions (e.g., US and India).
-[Include regional pipeline flow diagrams here]
+![stage 2](https://github.com/user-attachments/assets/a0f5199e-e22f-4534-9d4c-0dc3ede8d990)
 
 #### Stage 3: Loading Data into PostgreSQL
+![schemas](https://github.com/user-attachments/assets/7b535fc4-4690-48bf-9b70-efeab3cf0d2b)
 - Ingest Parquet files from Azure Data Lake to PostgreSQL.
   - **Landing Schema**: Initial staging schema.
+    ![land](https://github.com/user-attachments/assets/a50fd17f-3d33-448b-a696-ac8da352dd6b)
   - **Target Schema**: Production schema for analytics.
-[Include schema diagrams here]
-
+    ![target](https://github.com/user-attachments/assets/d0002b2a-8844-4ae8-bb94-0bf01b4086df)
+    
 ---
 
 ## Azure CI/CD Implementation
+![artifacts](https://github.com/user-attachments/assets/b439d094-e659-4790-a257-c4df84fee1ba)
 ### Key Actions:
 - **Pre-Deployment**:
   - Stop triggers.
@@ -84,7 +90,7 @@ Design and implement a data pipeline capable of extracting large volumes of data
   - Monitor pipeline performance.
   - Clean up removed resources.
 - Deployment workflows for Pre-Production and Production environments are systematically managed.
-[Include CI/CD diagrams and steps here]
+![prepost deploment](https://github.com/user-attachments/assets/386033a3-765a-414d-840e-10de64793546)
 
 ---
 
@@ -94,7 +100,7 @@ Design and implement a data pipeline capable of extracting large volumes of data
   - Pipeline definitions.
   - Configuration files.
   - Deployment templates.
-[Include repository structure diagrams here]
+![sucess deploy](https://github.com/user-attachments/assets/af79d32b-1c3d-4095-90ab-bcfb75ff86c9)
 
 ---
 
