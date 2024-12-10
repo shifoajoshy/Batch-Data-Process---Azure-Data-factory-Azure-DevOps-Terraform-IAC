@@ -20,7 +20,7 @@ Design and implement a data pipeline capable of extracting large volumes of data
 ---
 
 ## Architecture
-[Include architecture diagram link or embed image here]
+![Architecture](https://github.com/user-attachments/assets/9da270af-547c-4a57-b78a-9058174642bf)
 
 ---
 
