@@ -16,12 +16,13 @@ Design and implement a data pipeline capable of extracting large volumes of data
 - **Azure DevOps**: Facilitates version control, CI/CD pipeline setup, and collaboration.
 - **Azure Data Lake**: Provides secure and scalable storage for intermediate and raw datasets.
 - **Azure PostgreSQL**: Serves as the target database for structured and processed data storage.
-![logical flow](https://github.com/user-attachments/assets/024e5c4d-ac39-4c1c-bcd3-ebf65832adf0)
-
 ---
 
 ## Architecture
 ![Architecture](https://github.com/user-attachments/assets/9da270af-547c-4a57-b78a-9058174642bf)
+
+## Logical Flow
+![logical flow](https://github.com/user-attachments/assets/024e5c4d-ac39-4c1c-bcd3-ebf65832adf0)
 
 ---
 
@@ -54,7 +55,8 @@ Design and implement a data pipeline capable of extracting large volumes of data
 - **Data Format Conversion**: Convert JSON data from OpenWeather APIs to CSV format.
 - **Parquet File Transformation**: Transform CSV files to Parquet format for efficient ingestion into PostgreSQL.
 - **Storage Optimization**: Delete intermediate CSV files post-transformation to save storage space.
-####Main pipeline
+  
+#### Main pipeline
 ![Main pipeline](https://github.com/user-attachments/assets/ddcdbc03-7299-4fd4-8bec-44ce4e2f77e4)
 
 #### Stage 1: Lookup and Dynamic API Calls
@@ -65,8 +67,13 @@ Design and implement a data pipeline capable of extracting large volumes of data
 #### Stage 2: Data Storage in Azure Data Lake
 - Transfer API data to Blob Storage in JSON format.
 - Convert JSON to CSV, then to Parquet for optimized storage.
-- Separate pipelines for different regions (e.g., US and India).
+- Separate pipelines for different regions.
+  
+##### For Extracting US region data
 ![stage 2](https://github.com/user-attachments/assets/a0f5199e-e22f-4534-9d4c-0dc3ede8d990)
+##### For Extracting India region data
+![stage 2 india](https://github.com/user-attachments/assets/9d2957c4-32b6-4ed0-a90c-35c70c0e1073)
+
 
 #### Stage 3: Loading Data into PostgreSQL
 ![schemas](https://github.com/user-attachments/assets/7b535fc4-4690-48bf-9b70-efeab3cf0d2b)
@@ -100,6 +107,7 @@ Design and implement a data pipeline capable of extracting large volumes of data
   - Pipeline definitions.
   - Configuration files.
   - Deployment templates.
+    
 ![sucess deploy](https://github.com/user-attachments/assets/af79d32b-1c3d-4095-90ab-bcfb75ff86c9)
 
 ---
